@@ -1,20 +1,26 @@
----
-title: "R and Bioconductor for proteomics"
-subtitle: "Including visualisation"
-author: "[Laurent Gatto](#laurent-gatto)"
-date: "2018/01/15"
-output:
-  xaringan::moon_reader:
-    css: ["default", "default-fonts", "my.css"]
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>R and Bioconductor for proteomics</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Laurent Gatto" />
+    <link href="rfp_files/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="rfp_files/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="my.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# R and Bioconductor for proteomics
+## Including visualisation
+### <a href="#laurent-gatto">Laurent Gatto</a>
+### 2018/01/15
+
 ---
 
-```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
-```
+
+
 
 class: middle
 name: cc-by
@@ -26,7 +32,7 @@ These slides are available under a **creative common
 free to share (copy and redistribute the material in any medium or
 format) and adapt (remix, transform, and build upon the material) for
 any purpose, even commercially
-<img height="20px" alt="CC-BY" src="./img/cc1.jpg" />.
+&lt;img height="20px" alt="CC-BY" src="./img/cc1.jpg" /&gt;.
 
 ---
 class: middle, center, inverse
@@ -63,7 +69,7 @@ for details.)
 ---
 class: middle, center
 
-<a href="https://twitter.com/mikelove/status/950461433388654592?ref_src=twsrc%5Etfw"><img alt="Mike Love's tweet" src="./figure/mlove_tweet.png"/></a>
+&lt;a href="https://twitter.com/mikelove/status/950461433388654592?ref_src=twsrc%5Etfw"&gt;&lt;img alt="Mike Love's tweet" src="./figure/mlove_tweet.png"/&gt;&lt;/a&gt;
 
 ???
 
@@ -129,8 +135,8 @@ class: middle
 
 ## What is data analysis
 
-> Data analysis is the process by which data becomes understanding,
-> knowledge and insight. Hadley Wickham
+&gt; Data analysis is the process by which data becomes understanding,
+&gt; knowledge and insight. Hadley Wickham
 
 The ability to prepare and **explore** data, identify **patterns**
 (good and pathological ones) and convincingly demonstrate that the
@@ -168,7 +174,7 @@ class: middle
 * ~~Be a programmer~~
 * ~~Be a statistician/machine learner~~
 
-<br/>
+&lt;br/&gt;
 
 --
 * Knowledge about the domain
@@ -178,7 +184,7 @@ class: middle
 
 --
 
-<br/>
+&lt;br/&gt;
 
 [**Good enough**](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510) (Wilson
 *et al.*, 2017)
@@ -190,11 +196,11 @@ class: middle
 
 To understand and communication data:
 
-> Graphics reveal data.
+&gt; Graphics reveal data.
 
   
-> Visualization can surprise you, but it doesn’t scale well. Modeling
-> scales well, but it can’t surprise you. Hadley Wickham
+&gt; Visualization can surprise you, but it doesn’t scale well. Modeling
+&gt; scales well, but it can’t surprise you. Hadley Wickham
 
 ---
 class: middle, center, inverse
@@ -243,7 +249,7 @@ class: middle, center
 ##### R/Bioconductor for proteomics
 
 - The [Bioconductor](http://www.bioconductor.org) web site.
-- The `r BiocStyle::Biocexptpkg("RforProteomics")` package
+- The *[RforProteomics](http://bioconductor.org/packages/RforProteomics)* package
 - *Using R and Bioconductor for proteomics data analysis*
   ([10.1016/j.bbapap.2013.04.032](https://www.ncbi.nlm.nih.gov/pubmed/23692960))
 - *Visualisation of proteomics data using R and Bioconductor*
@@ -271,20 +277,20 @@ name: laurent-gatto
 
 
 .pull-left[
-<img src="./img/lgatto3b.png" width = "180px"/>
+&lt;img src="./img/lgatto3b.png" width = "180px"/&gt;
 ### Laurent Gatto
-<i class="fas fa-flask"></i>&nbsp;[Computational Proteomics Unit](https://lgatto.github.io/cpu-lab/)<br />
-<i class="fas fa-map-marker-alt"></i>&nbsp;University of Cambridge<br />
-<i class="fas fa-envelope"></i>&nbsp;lg390@cam.ac.uk<br />
-<i class="fas fa-home"></i>&nbsp;https://lgatto.github.io<br />
-<i class="fab fa-twitter"></i>&nbsp;[@lgatto](https://twitter.com/lgatt0/)<br />
-<i class="fab fa-github"></i>&nbsp;[lgatto](https://github.com/lgatto/)<br />
-<img width="20px" align="top" alt="orcid" src="./img/orcid_64x64.png" />&nbsp;[0000-0002-1520-2268](https://orcid.org/0000-0002-1520-2268)<br />
-<img width="20px" align="top" alt="Impact story" src="./img/keybase.png"/>&nbsp;[lgatto](https://keybase.io/lgatto)<br />
-<img width="20px" align="top" alt="Google scholar" src="./img/gscholar.png"/>&nbsp;[Google scholar](https://scholar.google.co.uk/citations?user=k5DrB74AAAAJ&hl=en)<br />
-<img width="20px" align="top" alt="Impact story" src="./img/impactstory-logo.png"/>&nbsp;[Impact story](https://profiles.impactstory.org/u/0000-0002-1520-2268)<br />
-<i class="fas fa-pencil-alt"></i>&nbsp;[dissem.in](https://dissem.in/r/6231/laurent-gatto)<br />
-<!-- <i class="fab fa-linkedin"></i>&nbsp;https://www.linkedin.com/in/lgatto/<br /> -->
+&lt;i class="fas fa-flask"&gt;&lt;/i&gt;&amp;nbsp;[Computational Proteomics Unit](https://lgatto.github.io/cpu-lab/)&lt;br /&gt;
+&lt;i class="fas fa-map-marker-alt"&gt;&lt;/i&gt;&amp;nbsp;University of Cambridge&lt;br /&gt;
+&lt;i class="fas fa-envelope"&gt;&lt;/i&gt;&amp;nbsp;lg390@cam.ac.uk&lt;br /&gt;
+&lt;i class="fas fa-home"&gt;&lt;/i&gt;&amp;nbsp;https://lgatto.github.io&lt;br /&gt;
+&lt;i class="fab fa-twitter"&gt;&lt;/i&gt;&amp;nbsp;[@lgatto](https://twitter.com/lgatt0/)&lt;br /&gt;
+&lt;i class="fab fa-github"&gt;&lt;/i&gt;&amp;nbsp;[lgatto](https://github.com/lgatto/)&lt;br /&gt;
+&lt;img width="20px" align="top" alt="orcid" src="./img/orcid_64x64.png" /&gt;&amp;nbsp;[0000-0002-1520-2268](https://orcid.org/0000-0002-1520-2268)&lt;br /&gt;
+&lt;img width="20px" align="top" alt="Impact story" src="./img/keybase.png"/&gt;&amp;nbsp;[lgatto](https://keybase.io/lgatto)&lt;br /&gt;
+&lt;img width="20px" align="top" alt="Google scholar" src="./img/gscholar.png"/&gt;&amp;nbsp;[Google scholar](https://scholar.google.co.uk/citations?user=k5DrB74AAAAJ&amp;hl=en)&lt;br /&gt;
+&lt;img width="20px" align="top" alt="Impact story" src="./img/impactstory-logo.png"/&gt;&amp;nbsp;[Impact story](https://profiles.impactstory.org/u/0000-0002-1520-2268)&lt;br /&gt;
+&lt;i class="fas fa-pencil-alt"&gt;&lt;/i&gt;&amp;nbsp;[dissem.in](https://dissem.in/r/6231/laurent-gatto)&lt;br /&gt;
+&lt;!-- &lt;i class="fab fa-linkedin"&gt;&lt;/i&gt;&amp;nbsp;https://www.linkedin.com/in/lgatto/&lt;br /&gt; --&gt;
 ]
 
 .pull-right[
@@ -301,6 +307,40 @@ developement)
 
 ### Find the slides [online](https://rawgit.com/lgatto/slide-templates/master/my_template.html).
 ]
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
 
-
-
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
