@@ -13,7 +13,7 @@
 class: center, middle, inverse, title-slide
 
 # R and Bioconductor for proteomics
-## Including visualisation
+## Visualising your manipulating data
 ### <a href="#laurent-gatto">Laurent Gatto</a>
 ### 2018/01/15
 
@@ -171,7 +171,7 @@ f &lt;- "~/Data2/MS3/SP_newer_software.mzML"
 x &lt;- readMSData(f, mode = "onDisk")
 ```
 The file *SP_newer_software.mzML* is read in to create a *raw data* object called
-`x`. The file contains 1 spectra of levels
+`x`. The file contains 121943 spectra of levels
 
 
 ```r
@@ -257,15 +257,6 @@ rtime(x2)
 ```
 ## F1.S074867 F1.S074868 F1.S074870 
 ##   7486.340   7486.360   7486.615
-```
-
-```r
-scanIndex(x2)
-```
-
-```
-## F1.S074867 F1.S074868 F1.S074870 
-##      74867      74868      74870
 ```
 
 ---
@@ -389,16 +380,19 @@ class: middle, center, inverse
 class: middle
 
 - Based on raw data 
-- identification data
-- quantitative data
+- Identification data
+- Quantitative data
 - ...
-- using QC or *real* samples
+- Using QC or *real* samples
+- Monitoring QC metrics over time
 
 ---
 class: middle, center
 
 ![plotMzDelta](./figure/plotMzDelta-pride12011.png)
 
+
+Based on [Foster *et al.* (2011)](https://www.ncbi.nlm.nih.gov/pubmed/21538885), implemented in `MSnbase`.
 
 ---
 class: middle, center, inverse
@@ -487,6 +481,7 @@ class: middle
 
 - The [Bioconductor](http://www.bioconductor.org) web site.
 - The *[RforProteomics](http://bioconductor.org/packages/RforProteomics)* package
+- The *[MSnbase](http://bioconductor.org/packages/MSnbase)* and [Gatto and Lilley (2014)](https://www.ncbi.nlm.nih.gov/pubmed/22113085).
 - *Using R and Bioconductor for proteomics data analysis*
   ([10.1016/j.bbapap.2013.04.032](https://www.ncbi.nlm.nih.gov/pubmed/23692960))
 - *Visualisation of proteomics data using R and Bioconductor*

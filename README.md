@@ -2,6 +2,8 @@
 
 15 January 2018, Sainsbury Laboratory, Norwich, UK
 
+![First slide](./img/slide1.png)
+
 The [slides](http://bit.ly/20180115tsl) are available under a creative
 common
 [CC-BY license](http://creativecommons.org/licenses/by/4.0/). You are

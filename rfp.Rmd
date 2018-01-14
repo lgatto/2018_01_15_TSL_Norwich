@@ -1,6 +1,6 @@
 ---
 title: "R and Bioconductor for proteomics"
-subtitle: "Including visualisation"
+subtitle: "Visualising your manipulating data"
 author: "[Laurent Gatto](#laurent-gatto)"
 date: "2018/01/15"
 output:
@@ -13,7 +13,7 @@ output:
 ---
 
 
-```{r setup, include=FALSE, cache=TRUE}
+```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 suppressPackageStartupMessages(library("MSnbase"))
 library("knitr")
@@ -166,7 +166,7 @@ f <- "~/Data2/MS3/SP_newer_software.mzML"
 x <- readMSData(f, mode = "onDisk")
 ```
 The file *`r basename(f)`* is read in to create a *raw data* object called
-`x`. The file contains `r length(x)` spectra of levels
+`x`. The file contains `r nrow(fData(x))` spectra of levels
 
 ```{r mslevel}
 table(msLevel(x))
@@ -206,7 +206,6 @@ class: middle, centre
 x2 <- filterPrecursorScan(x, i)
 msLevel(x2)
 rtime(x2)
-scanIndex(x2)
 ```
 
 ---
@@ -214,7 +213,7 @@ class: middle
 
 Following the spectra along the MS levels
 
-```{r plotms, echo=FALSE, fig.width = 15, fig.height = 5}
+```{r plotms, echo=FALSE, fig.width = 14, fig.height = 4.4}
 ms <- lapply(spectra(x2), as.data.frame)
 par(mfrow = c(1, 3))
 plot(ms[[1]], type = "h", main = "MS1")
@@ -329,16 +328,19 @@ class: middle, center, inverse
 class: middle
 
 - Based on raw data 
-- identification data
-- quantitative data
+- Identification data
+- Quantitative data
 - ...
-- using QC or *real* samples
+- Using QC or *real* samples
+- Monitoring QC metrics over time
 
 ---
 class: middle, center
 
 ![plotMzDelta](./figure/plotMzDelta-pride12011.png)
 
+
+Based on [Foster *et al.* (2011)](https://www.ncbi.nlm.nih.gov/pubmed/21538885), implemented in `MSnbase`.
 
 ---
 class: middle, center, inverse
@@ -427,6 +429,7 @@ class: middle
 
 - The [Bioconductor](http://www.bioconductor.org) web site.
 - The `r BiocStyle::Biocexptpkg("RforProteomics")` package
+- The `r BiocStyle::Biocpkg("MSnbase")` and [Gatto and Lilley (2014)](https://www.ncbi.nlm.nih.gov/pubmed/22113085).
 - *Using R and Bioconductor for proteomics data analysis*
   ([10.1016/j.bbapap.2013.04.032](https://www.ncbi.nlm.nih.gov/pubmed/23692960))
 - *Visualisation of proteomics data using R and Bioconductor*
