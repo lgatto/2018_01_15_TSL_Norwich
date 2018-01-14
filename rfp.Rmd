@@ -12,8 +12,10 @@ output:
       countIncrementalSlides: false
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, cache=TRUE}
 options(htmltools.dir.version = FALSE)
+suppressPackageStartupMessages(library("MSnbase"))
+library("knitr")
 ```
 
 class: middle
@@ -203,6 +205,7 @@ class: middle, center, inverse
 
 ### How does mass spectrometry work
 ### Spatial proteomics
+### Quality control
 
 ---
 class: middle
@@ -223,13 +226,75 @@ demonstrate the power and flexibility of the software.
 ---
 class: middle
 
-- Liquid chromatography separation
-- Schematics (not real data)
-- Analyser and detector animation (not real data)
-- MS1, with selected precursor
-- MS2, with selected reporter ions
-- MS3
-- 3D Animation 
+```{r readdata, cache = TRUE}
+library("MSnbase")
+f <- "~/Data2/MS3/SP_newer_software.mzML"
+x <- readMSData(f, mode = "onDisk", centroided = c(FALSE, TRUE, TRUE))
+```
+The file `r basename(f)` is read in to create a *raw data* object called
+`x`. The file contains `r length(x)` spectra of levels
+
+```{r mslevel}
+table(msLevel(x))
+```
+
+---
+class: middle
+
+```{r chrom, cache=TRUE}
+chr <- chromatogram(x, aggregationFun = "sum")
+plot(chr, main = "Chromatogram (TIC)")
+```
+
+---
+class: middle
+
+
+What is the spectrum with the highest precursor intensity?
+
+```{r}
+(i <- which.max(precursorIntensity(x)))
+(sp <- x[[i]])
+```
+
+---
+class: middle
+
+```{r}
+plot(chr, main = "Chromatogram (TIC)")
+abline(v = rtime(sp), col = "red")
+```
+
+---
+class: middle, centre
+
+```{r filter}
+x2 <- filterPrecursorScan(x, i)
+msLevel(x2)
+rtime(x2)
+scanIndex(x2)
+```
+
+---
+class: middle
+
+Following the spectra along the MS levels
+
+```{r plotms, echo=FALSE, fig.width = 15, fig.height = 5}
+ms <- lapply(spectra(x2), as.data.frame)
+par(mfrow = c(1, 3))
+plot(ms[[1]], type = "h", main = "MS1")
+abline(v = precursorMz(x2)[2], col = "red", lty = "dotted")
+plot(ms[[2]], type = "h", main = "MS2")
+plot(ms[[3]], type = "h", xlim = c(126.1, 131.2), main = "MS3")
+```
+
+---
+class: middle
+
+.pull-left[![](./figure/plot3D.png)]
+.pull-right[![](./figure/plot3D-2.png)]
+
 
 ---
 class: middle, center

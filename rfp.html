@@ -209,6 +209,7 @@ class: middle, center, inverse
 
 ### How does mass spectrometry work
 ### Spatial proteomics
+### Quality control
 
 ---
 class: middle
@@ -229,13 +230,123 @@ demonstrate the power and flexibility of the software.
 ---
 class: middle
 
-- Liquid chromatography separation
-- Schematics (not real data)
-- Analyser and detector animation (not real data)
-- MS1, with selected precursor
-- MS2, with selected reporter ions
-- MS3
-- 3D Animation 
+
+```r
+library("MSnbase")
+f &lt;- "~/Data2/MS3/SP_newer_software.mzML"
+x &lt;- readMSData(f, mode = "onDisk", centroided = c(FALSE, TRUE, TRUE))
+```
+The file SP_newer_software.mzML is read in to create a *raw data* object called
+`x`. The file contains 1 spectra of levels
+
+
+```r
+table(msLevel(x))
+```
+
+```
+## 
+##     1     2     3 
+##  4902 58521 58520
+```
+
+---
+class: middle
+
+
+```r
+chr &lt;- chromatogram(x, aggregationFun = "sum")
+plot(chr, main = "Chromatogram (TIC)")
+```
+
+![plot of chunk chrom](figure/chrom-1.png)
+
+---
+class: middle
+
+
+What is the spectrum with the highest precursor intensity?
+
+
+```r
+(i &lt;- which.max(precursorIntensity(x)))
+```
+
+```
+## F1.S074868 
+##      74868
+```
+
+```r
+(sp &lt;- x[[i]])
+```
+
+```
+## Object of class "Spectrum2"
+##  Precursor: 706.4677 
+##  Retention time: 124:46 
+##  Charge: 2 
+##  MSn level: 2 
+##  Peaks count: 195 
+##  Total ion count: 480640351
+```
+
+---
+class: middle
+
+
+```r
+plot(chr, main = "Chromatogram (TIC)")
+abline(v = rtime(sp), col = "red")
+```
+
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+
+---
+class: middle, centre
+
+
+```r
+x2 &lt;- filterPrecursorScan(x, i)
+msLevel(x2)
+```
+
+```
+## F1.S074867 F1.S074868 F1.S074870 
+##          1          2          3
+```
+
+```r
+rtime(x2)
+```
+
+```
+## F1.S074867 F1.S074868 F1.S074870 
+##   7486.340   7486.360   7486.615
+```
+
+```r
+scanIndex(x2)
+```
+
+```
+## F1.S074867 F1.S074868 F1.S074870 
+##      74867      74868      74870
+```
+
+---
+class: middle
+
+Following the spectra along the MS levels
+
+![plot of chunk plotms](figure/plotms-1.png)
+
+---
+class: middle
+
+.pull-left[![](./figure/plot3D.png)]
+.pull-right[![](./figure/plot3D-2.png)]
+
 
 ---
 class: middle, center
