@@ -9,7 +9,7 @@ free to share (copy and redistribute the material in any medium or
 format) and adapt (remix, transform, and build upon the material) for
 any purpose, even commercially.
 
-![CC-BY](./Figures/cc1.jpg)
+![CC-BY](./img/cc1.jpg)
 
 
 
