@@ -12,6 +12,7 @@ output:
       countIncrementalSlides: false
 ---
 
+
 ```{r setup, include=FALSE, cache=TRUE}
 options(htmltools.dir.version = FALSE)
 suppressPackageStartupMessages(library("MSnbase"))
@@ -21,7 +22,7 @@ library("knitr")
 class: middle
 name: cc-by
 
-### Get the slides at [short URL]().
+### Get the slides at [http://bit.ly/20180115tsl](http://bit.ly/20180115tsl).
 
 These slides are available under a **creative common
 [CC-BY license](http://creativecommons.org/licenses/by/4.0/)**. You are
@@ -124,91 +125,15 @@ class: middle, center
 ---
 class: middle, center, inverse
 
-# Data analyses
-
----
-class: middle
-
-## What is data analysis
-
-> Data analysis is the process by which data becomes understanding,
-> knowledge and insight. Hadley Wickham
-
-The ability to prepare and **explore** data, identify **patterns**
-(good and pathological ones) and convincingly demonstrate that the
-patterns are **genuine** (rather than random).
-
-It's not analysing data, it's *investigating* data - requires
-**flexibility**.
-
----
-class: middle, centre
-
-![Data analysis - credit Hadley Wickham](./figure/Data_Analysis_Hadley_Wickham.png)
-
-
----
-class: middle
-
-## And also
-
-* Reproducibility/replicability
-* Automation
-* Tracking, re-use, share, communicate
-
-
-`Data programming`,  but:
-
-* Learning curve (although, I would argue that the
-  reflecting/investigating/analysing the data is the real challenge)
-
----
-class: middle
-
-## To analyse data, you need
-
-* ~~Be a programmer~~
-* ~~Be a statistician/machine learner~~
-
-<br/>
-
---
-* Knowledge about the domain
-* Know about your data
-* Be able to manipulate/visualise it
-* How good do we need to be?
-
---
-
-<br/>
-
-[**Good enough**](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510) (Wilson
-*et al.*, 2017)
-
----
-class: middle
-
-## Visualisation
-
-To understand and communication data:
-
-> Graphics reveal data.
-
-  
-> Visualization can surprise you, but it doesn’t scale well. Modeling
-> scales well, but it can’t surprise you. Hadley Wickham
-
----
-class: middle, center, inverse
-
 # Use cases
 
 ### How does mass spectrometry work
-### Spatial proteomics
+### Identification data
+### Quantitative proteomics
 ### Quality control
 
 ---
-class: middle
+class: middle, center, inverse
 
 ### How does mass spectrometry work, **visually**
 
@@ -224,14 +149,25 @@ The aim is not to produce visualisations for the sake of it, but to
 demonstrate the power and flexibility of the software.
 
 ---
+class: middle, center
+
+![MS schematics](./figure/SchematicMS2.png)
+
+---
+class: middle, center
+
+![Analysis and detection](./figure/mstut.gif)
+
+
+---
 class: middle
 
 ```{r readdata, cache = TRUE}
 library("MSnbase")
 f <- "~/Data2/MS3/SP_newer_software.mzML"
-x <- readMSData(f, mode = "onDisk", centroided = c(FALSE, TRUE, TRUE))
+x <- readMSData(f, mode = "onDisk")
 ```
-The file `r basename(f)` is read in to create a *raw data* object called
+The file *`r basename(f)`* is read in to create a *raw data* object called
 `x`. The file contains `r length(x)` spectra of levels
 
 ```{r mslevel}
@@ -302,6 +238,190 @@ class: middle, center
 .pull-left[![](./figure/msanim1.gif)]
 .pull-right[![](./figure/msanim2.gif)]
 
+
+---
+class: middle, center, inverse
+
+### Identification data
+
+---
+class: middle
+
+```{r id}
+library("msdata")
+f <- "TMT_Erwinia_1uLSike_Top10HCD_isol2_45stepped_60min_01-20141210.mzid"
+idf <- msdata::ident(full.names = TRUE, pattern = f)
+iddf <- readMzIdData(idf)
+```
+
+---
+class: middle, center
+
+
+```{r plotid, echo=FALSE}
+library("ggplot2")
+ggplot(data = iddf, aes(x = MS.GF.RawScore, colour = isDecoy)) +
+    geom_density() +
+    facet_wrap(~chargeState)
+```
+
+---
+class: middle
+
+Counting PSMs, peptides, protein ...
+
+---
+class: middle
+
+
+```{r echo=FALSE}
+data(itraqdata)
+itraqdata2 <- pickPeaks(itraqdata, verbose=FALSE)
+i <- 14
+s <- as.character(fData(itraqdata2)[i, "PeptideSequence"])
+```
+
+```{r}
+head(calculateFragments("SIGFEGDSIGR"))
+```
+
+---
+class: middle
+
+```{r}
+plot(itraqdata2[[i]], "SIGFEGDSIGR", main = "SIGFEGDSIGR")
+```
+
+
+---
+class: middle
+
+```{r}
+plot(itraqdata2[[41]], itraqdata2[[42]])
+```
+
+---
+class: middle, center, inverse
+
+
+### Quantitative proteomics
+
+---
+class: middle
+
+### `MSnSet`: expression data, sample and feature meta-data
+
+![MSnSet structure](./figure/msnset.png)
+
+
+From raw data or any third party software.
+
+
+---
+class: middle, center
+
+![PCA](./figure/pcaprot-1.png)
+
+---
+class: middle, center, inverse
+
+### Quality control
+
+---
+class: middle
+
+- Based on raw data 
+- identification data
+- quantitative data
+- ...
+- using QC or *real* samples
+
+---
+class: middle, center
+
+![plotMzDelta](./figure/plotMzDelta-pride12011.png)
+
+
+---
+class: middle, center, inverse
+
+# Data analyses
+
+---
+class: middle
+
+## What is data analysis
+
+> Data analysis is the process by which data becomes understanding,
+> knowledge and insight. Hadley Wickham
+
+The ability to prepare and **explore** data, identify **patterns**
+(good and pathological ones) and convincingly demonstrate that the
+patterns are **genuine** (rather than random).
+
+It's not analysing data, it's *investigating* data - requires
+**flexibility**.
+
+---
+class: middle
+
+## And also
+
+* Reproducibility/replicability
+* Automation
+* Tracking, re-use, share, communicate
+
+
+`Data programming`,  but:
+
+* Learning curve (although, I would argue that the
+  reflecting/investigating/analysing the data is the real challenge)
+
+---
+class: middle
+
+## To analyse data, you need
+
+* ~~Be a programmer~~
+* ~~Be a statistician/machine learner~~
+
+<br/>
+
+--
+* Knowledge about the domain
+* Know about your data
+* Be able to manipulate/visualise it
+* How good do we need to be?
+
+--
+
+<br/>
+
+[**Good enough**](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1005510) (Wilson
+*et al.*, 2017)
+
+---
+class: middle
+
+## Visualisation
+
+To understand and communication data:
+
+> Graphics reveal data.
+
+  
+> Visualization can surprise you, but it doesn’t scale well. Modeling
+> scales well, but it can’t surprise you. Hadley Wickham
+
+---
+class: middle
+
+## Also in R/Bioconductor
+
+- Automation
+- Report generation
+- Interactive visualisation - for example [here](https://lgatto.shinyapps.io/christoforou2015/)
+
 ---
 # More information
 
@@ -318,17 +438,6 @@ class: middle, center
   various
   [teaching material](https://lgatto.github.io/TeachingMaterial/)
   and [here](https://rawgit.com/lgatto/bioc-ms-prot/master/lab.html).
-
-##### Spatial proteomics:
-
-- *A Bioconductor workflow for processing and analysing spatial
-  proteomics data*
-  ([10.12688/f1000research.10411.1](https://f1000research.com/articles/5-2926/))
-- *Using HyperLOPIT to perform high-resolution mapping of the spatial
-  proteome*
-  ([10.1038/nprot.2017.026](https://www.nature.com/nprot/journal/v12/n6/full/nprot.2017.026.html))
-- *A draft map of the mouse pluripotent stem cell spatial proteome*
-  ([10.1038/ncomms9992](http://www.nature.com/ncomms/2016/160112/ncomms9992/abs/ncomms9992.html))
 
 ---
 class: middle
@@ -364,7 +473,7 @@ developement)
 
 ## Thank you for your attention
 
-### Find the slides [online](https://rawgit.com/lgatto/slide-templates/master/my_template.html).
+### Find the slides [http://bit.ly/20180115tsl](http://bit.ly/20180115tsl)
 ]
 
 
